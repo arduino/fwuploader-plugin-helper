@@ -61,7 +61,7 @@ func (d *dummyPlugin) UploadCertificate(portAddress string, certificatePath *pat
 		fmt.Fprintln(feedback.Err(), "Port address not specified")
 		return fmt.Errorf("invalid port address")
 	}
-	fmt.Fprintf(feedback.Out(), "Uploading to certificates to %s...\n", portAddress)
+	fmt.Fprintf(feedback.Out(), "Uploading certificates to %s...\n", portAddress)
 
 	// Fake upload
 	time.Sleep(5 * time.Second)
