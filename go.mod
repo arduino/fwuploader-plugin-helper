@@ -5,7 +5,8 @@ go 1.20
 require (
 	github.com/arduino/go-paths-helper v1.9.1
 	github.com/spf13/cobra v1.7.0
-	go.bug.st/relaxed-semver v0.10.2
+	go.bug.st/relaxed-semver v0.11.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (

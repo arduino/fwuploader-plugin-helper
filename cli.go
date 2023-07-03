@@ -23,6 +23,7 @@ import (
 
 	"github.com/arduino/go-paths-helper"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
 )
 
 // RunPlugin runs the given plugin
@@ -100,6 +101,14 @@ func RunPlugin(plugin Plugin) {
 	}
 	certCmd.AddCommand(certFlashCmd)
 
+	versionCmd := &cobra.Command{
+		Use:   "version",
+		Short: "Return informations about this fw-updater plugin",
+		Run: func(cmd *cobra.Command, args []string) {
+			printInfo(info)
+		},
+	}
+
 	appName := filepath.Base(os.Args[0])
 	cli := &cobra.Command{
 		Use:   appName,
@@ -107,6 +116,7 @@ func RunPlugin(plugin Plugin) {
 	}
 	cli.AddCommand(firmwareCmd)
 	cli.AddCommand(certCmd)
+	cli.AddCommand(versionCmd)
 	cli.PersistentFlags().StringVarP(&portAddress, "address", "p", "", "Port address")
 
 	if err := cli.Execute(); err != nil {
@@ -117,4 +127,19 @@ func RunPlugin(plugin Plugin) {
 func fatal(msg string, exitcode int) {
 	fmt.Fprintf(os.Stderr, "Error: %s\n", msg)
 	os.Exit(exitcode)
+}
+
+func printInfo(info *PluginInfo) {
+	type infoResult struct {
+		PluginInfo       *PluginInfo `yaml:"plugin_info"`
+		PluginAPIVersion int         `yaml:"plugin_api_version"`
+	}
+	data, err := yaml.Marshal(&infoResult{
+		PluginAPIVersion: 1,
+		PluginInfo:       info,
+	})
+	if err != nil {
+		fatal(err.Error(), 3)
+	}
+	fmt.Println(string(data))
 }
