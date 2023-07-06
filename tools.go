@@ -30,7 +30,7 @@ func FindToolPath(toolName string, toolVersion *semver.Version) (*paths.Path, er
 	if err != nil {
 		return nil, err
 	}
-	toolsDir := paths.New(executablePath).Parent()
+	toolsDir := paths.New(executablePath).Parent().Parent().Parent()
 	toolPath := toolsDir.Join(toolName, toolVersion.String())
 	if !toolPath.IsDir() {
 		return nil, fmt.Errorf("tool not found: %s@%s", toolName, toolVersion)
