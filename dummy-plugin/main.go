@@ -41,12 +41,29 @@ func (d *dummyPlugin) GetPluginInfo() *helper.PluginInfo {
 }
 
 // UploadFirmware performs a firmware upload on the board
-func (d *dummyPlugin) UploadFirmware(portAddress string, firmwarePath *paths.Path, feedback *helper.PluginFeedback) error {
+func (d *dummyPlugin) UploadFirmware(portAddress, fqbn string, firmwarePath *paths.Path, feedback *helper.PluginFeedback) error {
 	if portAddress == "" {
 		fmt.Fprintln(feedback.Err(), "Port address not specified")
 		return fmt.Errorf("invalid port address")
 	}
 	fmt.Fprintf(feedback.Out(), "Uploading %s to %s...\n", firmwarePath, portAddress)
+	if fqbn == "" {
+		fmt.Fprintln(feedback.Err(), "FQBN not specified")
+		return fmt.Errorf("invalid fqbn")
+	}
+
+	// Providing the fqbn to the plugin allows us to support a family of boards instead of a single one
+	switch fqbn {
+	case "arduino:renesas_uno:unor5":
+		// Do some board specific operations here
+		fmt.Fprintf(feedback.Out(), "Uploading firmware for %s \n", fqbn)
+	case "arduino:renesas_uno:unor4wifi":
+		// Do some board specific operations here
+		fmt.Fprintf(feedback.Out(), "Uploading firmware for %s \n", fqbn)
+	default:
+		fmt.Fprintf(feedback.Err(), "FQBN %s not supported by the plugin\n", fqbn)
+		return fmt.Errorf("invalid fqbn")
+	}
 
 	// Fake upload
 	time.Sleep(5 * time.Second)
@@ -56,7 +73,7 @@ func (d *dummyPlugin) UploadFirmware(portAddress string, firmwarePath *paths.Pat
 }
 
 // UploadCertificate performs a certificate upload on the board
-func (d *dummyPlugin) UploadCertificate(portAddress string, certificatePath *paths.Path, feedback *helper.PluginFeedback) error {
+func (d *dummyPlugin) UploadCertificate(portAddress, fqbn string, certificatePath *paths.Path, feedback *helper.PluginFeedback) error {
 	if portAddress == "" {
 		fmt.Fprintln(feedback.Err(), "Port address not specified")
 		return fmt.Errorf("invalid port address")
@@ -71,7 +88,7 @@ func (d *dummyPlugin) UploadCertificate(portAddress string, certificatePath *pat
 }
 
 // GetFirmwareVersion retrieve the firmware version installed on the board
-func (d *dummyPlugin) GetFirmwareVersion(portAddress string, feedback *helper.PluginFeedback) (*semver.RelaxedVersion, error) {
+func (d *dummyPlugin) GetFirmwareVersion(portAddress, fqbn string, feedback *helper.PluginFeedback) (*semver.RelaxedVersion, error) {
 	if portAddress == "" {
 		fmt.Fprintln(feedback.Err(), "Port address not specified")
 		return nil, fmt.Errorf("invalid port address")

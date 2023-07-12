@@ -31,6 +31,7 @@ func RunPlugin(plugin Plugin) {
 	info := plugin.GetPluginInfo()
 
 	var portAddress string
+	var fqbn string
 
 	firmwareFlashCmd := &cobra.Command{
 		Use:   "flash",
@@ -42,6 +43,7 @@ func RunPlugin(plugin Plugin) {
 			fwPath := paths.New(args[0])
 			err := plugin.UploadFirmware(
 				portAddress,
+				fqbn,
 				fwPath,
 				&PluginFeedback{stdOut: os.Stdout, stdErr: os.Stderr},
 			)
@@ -60,6 +62,7 @@ func RunPlugin(plugin Plugin) {
 			}
 			version, err := plugin.GetFirmwareVersion(
 				portAddress,
+				fqbn,
 				&PluginFeedback{stdOut: os.Stdout, stdErr: os.Stderr},
 			)
 			if err != nil {
@@ -86,6 +89,7 @@ func RunPlugin(plugin Plugin) {
 			certPath := paths.New(args[0])
 			err := plugin.UploadCertificate(
 				portAddress,
+				fqbn,
 				certPath,
 				&PluginFeedback{stdOut: os.Stdout, stdErr: os.Stderr},
 			)
@@ -118,6 +122,9 @@ func RunPlugin(plugin Plugin) {
 	cli.AddCommand(certCmd)
 	cli.AddCommand(versionCmd)
 	cli.PersistentFlags().StringVarP(&portAddress, "address", "p", "", "Port address")
+	// The fqbn is an optional flag that can be used by the plugin to do specific operations with a board.
+	// With this input we can support a family of boards and not only a single one per plugin
+	cli.PersistentFlags().StringVarP(&fqbn, "fqbn", "b", "", "Fully qualified board name")
 
 	if err := cli.Execute(); err != nil {
 		fatal(err.Error(), 1)
