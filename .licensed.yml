@@ -2,6 +2,10 @@
 sources:
   go: true
 
+reviewed:
+  go:
+    - github.com/arduino/go-paths-helper
+
 # Source: https://github.com/arduino/tooling-project-assets/blob/main/workflow-templates/assets/check-dependencies/AGPL-3.0/.licensed.yml
 allowed:
   # The following are based on: https://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses
