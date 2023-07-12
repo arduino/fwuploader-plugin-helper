@@ -30,13 +30,13 @@ type Plugin interface {
 	GetPluginInfo() *PluginInfo
 
 	// UploadFirmware performs a firmware upload on the board
-	UploadFirmware(portAddress string, firmwarePath *paths.Path, feedback *PluginFeedback) error
+	UploadFirmware(portAddress, fqbn string, firmwarePath *paths.Path, feedback *PluginFeedback) error
 
 	// UploadCertificate performs a certificate upload on the board
-	UploadCertificate(portAddress string, certificatePath *paths.Path, feedback *PluginFeedback) error
+	UploadCertificate(portAddress, fqbn string, certificatePath *paths.Path, feedback *PluginFeedback) error
 
 	// GetFirmwareVersion retrieve the firmware version installed on the board
-	GetFirmwareVersion(portAddress string, feedback *PluginFeedback) (*semver.RelaxedVersion, error)
+	GetFirmwareVersion(portAddress, fqbn string, feedback *PluginFeedback) (*semver.RelaxedVersion, error)
 }
 
 // PluginInfo is a set of information describing the plugin
