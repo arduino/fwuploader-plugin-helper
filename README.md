@@ -7,6 +7,7 @@
 [![Sync Labels status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/sync-labels.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/sync-labels.yml)
 [![Check Go Dependencies status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-go-dependencies-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-go-dependencies-task.yml)
 [![Check Taskfiles status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-taskfiles.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-taskfiles.yml)
+[![Check Workflows status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-workflows-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-workflows-task.yml)
 
 <!--[![Test Go status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/test-go-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/test-go-task.yml)-->
 <!--[![Codecov](https://codecov.io/gh/arduino/fwuploader-plugin-helper/branch/main/graph/badge.svg)](https://codecov.io/gh/arduino/fwuploader-plugin-helper)-->
