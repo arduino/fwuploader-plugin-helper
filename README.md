@@ -4,6 +4,7 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/arduino/fwuploader-plugin-helper.svg)](https://pkg.go.dev/github.com/arduino/fwuploader-plugin-helper)
 [![Check Go status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-go-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-go-task.yml)
+[![Sync Labels status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/sync-labels.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/sync-labels.yml)
 
 <!--[![Test Go status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/test-go-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/test-go-task.yml)-->
 <!--[![Codecov](https://codecov.io/gh/arduino/fwuploader-plugin-helper/branch/main/graph/badge.svg)](https://codecov.io/gh/arduino/fwuploader-plugin-helper)-->
