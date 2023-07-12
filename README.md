@@ -9,6 +9,7 @@
 [![Check Taskfiles status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-taskfiles.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-taskfiles.yml)
 [![Check Workflows status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-workflows-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-workflows-task.yml)
 [![Release status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/release-tag.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/release-tag.yml)
+[![Check Markdown status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-markdown-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/check-markdown-task.yml)
 
 <!--[![Test Go status](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/test-go-task.yml/badge.svg)](https://github.com/arduino/fwuploader-plugin-helper/actions/workflows/test-go-task.yml)-->
 <!--[![Codecov](https://codecov.io/gh/arduino/fwuploader-plugin-helper/branch/main/graph/badge.svg)](https://codecov.io/gh/arduino/fwuploader-plugin-helper)-->
@@ -29,7 +30,7 @@ e-mail contact: security@arduino.cc
 
 ## License
 
-Copyright (c) 2023 ARDUINO SA (www.arduino.cc)
+Copyright (c) 2023 ARDUINO SA (https://www.arduino.cc)
 
 The software is released under the GNU General Public License, which covers the main body
 of the serial-discovery code. The terms of this license can be found at:
