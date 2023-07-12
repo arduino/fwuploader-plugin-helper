@@ -18,11 +18,13 @@ package helper
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 
 	"github.com/arduino/go-paths-helper"
 	"github.com/spf13/cobra"
+	"golang.org/x/exp/slog"
 	"gopkg.in/yaml.v3"
 )
 
@@ -30,8 +32,12 @@ import (
 func RunPlugin(plugin Plugin) {
 	info := plugin.GetPluginInfo()
 
-	var portAddress string
-	var fqbn string
+	var (
+		fqbn        string
+		logLevel    string
+		verbose     bool
+		portAddress string
+	)
 
 	firmwareFlashCmd := &cobra.Command{
 		Use:   "flash",
@@ -117,6 +123,28 @@ func RunPlugin(plugin Plugin) {
 	cli := &cobra.Command{
 		Use:   appName,
 		Short: info.Name + " - This is an Arduino Firmware Uploader plugin.",
+		PersistentPreRun: func(cmd *cobra.Command, args []string) {
+			t, found := map[string]slog.Level{
+				"trace": slog.LevelDebug,
+				"debug": slog.LevelDebug,
+				"info":  slog.LevelInfo,
+				"warn":  slog.LevelWarn,
+				"error": slog.LevelError,
+				"fatal": slog.LevelError,
+				"panic": slog.LevelError,
+			}[logLevel]
+			if !found {
+				t = slog.LevelError
+			}
+
+			var w io.Writer
+			if !verbose {
+				w = io.Discard
+			} else {
+				w = os.Stdout
+			}
+			slog.SetDefault(slog.New(slog.NewTextHandler(w, &slog.HandlerOptions{Level: t})))
+		},
 	}
 	cli.AddCommand(firmwareCmd)
 	cli.AddCommand(certCmd)
@@ -125,6 +153,8 @@ func RunPlugin(plugin Plugin) {
 	// The fqbn is an optional flag that can be used by the plugin to do specific operations with a board.
 	// With this input we can support a family of boards and not only a single one per plugin
 	cli.PersistentFlags().StringVarP(&fqbn, "fqbn", "b", "", "Fully qualified board name")
+	cli.PersistentFlags().StringVar(&logLevel, "log-level", "info", "Messages with this level and above will be logged. Valid levels are: trace, debug, info, warn, error, fatal, panic")
+	cli.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Print the logs on the standard output.")
 
 	if err := cli.Execute(); err != nil {
 		fatal(err.Error(), 1)
